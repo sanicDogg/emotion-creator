@@ -31,9 +31,6 @@ pipeline {
    			        echo "=====================Copying====================="
 				sh "cp -R /root/jenkins/workspace/pipeline_build_sanic /home/ubuntu/emotion-creator-jenkins-front"
 				
-				echo "=====================Removing====================="
-				sh "rm -fR /root/jenkins/workspace/pipeline_build_sanic"
-				
 				echo "=====================Chown====================="
 				sh "chown ubuntu:ubuntu -R /home/ubuntu/emotion-creator-jenkins-front"
 			      }
