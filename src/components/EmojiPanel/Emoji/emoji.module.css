@@ -1,0 +1,13 @@
+@import "../../../vars.css";
+
+.emoji {
+    margin: 20px 10px;
+    font-size: var(--emoji-size);
+    line-height: var(--emoji-size);
+    color: red;
+    transition: transform .1s ease-in-out;
+}
+
+.selected {
+    transform: scale(1.4);
+}

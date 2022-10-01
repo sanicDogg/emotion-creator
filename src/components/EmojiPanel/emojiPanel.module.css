@@ -1,0 +1,11 @@
+@import "../../vars.css";
+
+.emojiPanel {
+    display: grid;
+    justify-items: center;
+    grid-template-columns: repeat(3, 1fr);
+    background-color: var(--emojiPanel-bg-color);
+    border-radius: 20px;
+    margin: 20px;
+    padding: 10px;
+}
