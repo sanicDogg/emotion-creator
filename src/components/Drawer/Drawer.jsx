@@ -32,8 +32,6 @@ export const Drawer = ({animated = false}) => {
       if (animated) dot.update();
       context.fillText(dot.emoji, dot.x, dot.y)
     });
-
-    requestAnimationFrame(draw.bind(this, context));
   };
 
   const handlers = {

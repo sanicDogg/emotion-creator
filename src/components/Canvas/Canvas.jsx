@@ -8,8 +8,21 @@ const Canvas = ({draw, touchEventsHandlers}) => {
 
   React.useEffect(() => {
     const context = canvas.current.getContext("2d");
-    draw(context);
 
+    let frameCount = 0;
+    let animationFrameId;
+
+    const render = () => {
+      frameCount++
+      draw(context, frameCount)
+      animationFrameId = window.requestAnimationFrame(render)
+    }
+
+    render();
+
+    return () => {
+      window.cancelAnimationFrame(animationFrameId)
+    }
   }, [draw]);
 
   return <canvas className={s.canvas} ref={canvas} height={CANVAS_HEIGHT} width={CANVAS_WIDTH}
