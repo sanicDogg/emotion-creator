@@ -26,7 +26,7 @@ pipeline {
 				sh "npm run build"
 			
    			        echo "=====================Copying====================="
-				sh "cp /root/jenkins/workspace/pipeline_build_sanic /home/ubuntu/emotion-creator-jenkins-front"
+				sh "cp -R /root/jenkins/workspace/pipeline_build_sanic /home/ubuntu/emotion-creator-jenkins-front"
 
 				echo "=====================Chown====================="
 				sh "chown ubuntu:ubuntu -R /home/ubuntu/emotion-creator-jenkins-front"
