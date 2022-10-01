@@ -9,6 +9,7 @@ const Canvas = ({draw, touchEventsHandlers}) => {
   React.useEffect(() => {
     const context = canvas.current.getContext("2d");
     draw(context);
+
   }, [draw]);
 
   return <canvas className={s.canvas} ref={canvas} height={CANVAS_HEIGHT} width={CANVAS_WIDTH}

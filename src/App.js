@@ -1,14 +1,13 @@
 import React from "react";
-import { Drawer } from "./components/Drawer/Drawer";
-import { EmojiPanel } from "./components/EmojiPanel/EmojiPanel";
+import { Main } from "./components/Main/Main";
+import { EmojiProvider } from "./contexts/EmojiContext";
 
 
 function App() {
   return (
-    <>
-      <Drawer/>
-      <EmojiPanel />
-    </>
+    <EmojiProvider>
+      <Main />
+    </EmojiProvider>
   )
 }
 

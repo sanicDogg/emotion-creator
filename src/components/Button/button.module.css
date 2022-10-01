@@ -1,0 +1,19 @@
+@import "../../vars.css";
+
+.button {
+    border-radius: 10px;
+    background-color: var(--button-bg-color);
+    font-size: var(--button-font-size);
+    font-weight: 700;
+    line-height: calc(var(--emoji-size) + 20px);
+    text-align: center;
+    font-family: sans-serif;
+    margin: var(--margin);
+    transform: scale(1);
+
+    transition: transform .05s ease-in-out;
+}
+
+.button:hover {
+    transform: scale(0.9);
+}

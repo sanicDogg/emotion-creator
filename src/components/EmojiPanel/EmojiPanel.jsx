@@ -1,19 +1,23 @@
-import { useState } from "react";
-import { emojies } from "../../utils";
+import { useContext, useState } from "react";
+import { EmojiContext } from "../../contexts/EmojiContext";
+import { emojis } from "../../utils";
 import { Emoji } from "./Emoji/Emoji";
 import s from "./emojiPanel.module.css";
 
 export const EmojiPanel = () => {
-  const [selected, setSelected] = useState(emojies[0]);
+  const [selected, setSelected] = useState(emojis[0]);
+  const { changeMainEmoji } = useContext(EmojiContext);
+
 
   const clickHandler = (content) => {
     setSelected(content);
+    changeMainEmoji(content);
   }
 
   return (
     <div className={s.emojiPanel}>
       {
-        emojies.map((em) => <Emoji key={em} content={em} selectEmoji={clickHandler} selected={selected === em}/> )
+        emojis.map((em) => <Emoji key={em} content={em} selectEmoji={clickHandler} selected={selected === em}/> )
       }
     </div>
   )

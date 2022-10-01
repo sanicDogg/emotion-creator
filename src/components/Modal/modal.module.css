@@ -1,0 +1,26 @@
+@import "../../vars.css";
+
+.modalInner {
+    width: 250px;
+    height: 250px;
+    z-index: 99999;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal img {
+    width: 100%;
+}
