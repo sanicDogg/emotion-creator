@@ -1,0 +1,53 @@
+#!groovy
+
+pipeline {
+	agent precise
+	triggers {pollSCM('* * * * *')}
+	options {
+		buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
+		timestamps()
+	}
+
+	stages {
+		stage("Create docker image") {
+			steps {
+				withCredentials([string(credentialsId: 'botSecret2', variable: 'TOKEN'), string(credentialsId: 'chatID2', variable: 'CHAT_ID')]) {
+                                sh  ("""
+                                curl -s -X POST https://api.telegram.org/bot${TOKEN}/sendMessage -d chat_id=${CHAT_ID} -d parse_mode=markdown -d text='*${env.JOB_NAME}* : *Branch*: ${env.GIT_BRANCH} *Build starting!*'
+                                """)
+                                }
+				echo "=====================Installing npm dependences====================="
+				sh "npm install"
+			}
+		}
+		stage("Push image to Dockerhub") {
+			steps {
+				echo "=====================Building====================="
+				sh "npm run build"
+			}
+		}
+	}
+	  post {
+          success { 
+          withCredentials([string(credentialsId: 'botSecret2', variable: 'TOKEN'), string(credentialsId: 'chatID2', variable: 'CHAT_ID')]) {
+          sh  ("""
+              curl -s -X POST https://api.telegram.org/bot${TOKEN}/sendMessage -d chat_id=${CHAT_ID} -d parse_mode=markdown -d text='*${env.JOB_NAME}* : POC *Branch*: ${env.GIT_BRANCH} *Build* : OK *Published* = YES'
+          """)
+          }
+          }
+          aborted {
+          withCredentials([string(credentialsId: 'botSecret2', variable: 'TOKEN'), string(credentialsId: 'chatID2', variable: 'CHAT_ID')]) {
+          sh  ("""
+              curl -s -X POST https://api.telegram.org/bot${TOKEN}/sendMessage -d chat_id=${CHAT_ID} -d parse_mode=markdown -d text='*${env.JOB_NAME}* : POC *Branch*: ${env.GIT_BRANCH} *Build* : `Aborted` *Published* = `Aborted`'
+          """)
+          }
+          }
+          failure {
+          withCredentials([string(credentialsId: 'botSecret2', variable: 'TOKEN'), string(credentialsId: 'chatID2', variable: 'CHAT_ID')]) {
+          sh  ("""
+              curl -s -X POST https://api.telegram.org/bot${TOKEN}/sendMessage -d chat_id=${CHAT_ID} -d parse_mode=markdown -d text='*${env.JOB_NAME}* : POC  *Branch*: ${env.GIT_BRANCH} *Build* : `FAILURE` *Published* = `no`'
+          """)
+          }
+          }
+        }
+}
