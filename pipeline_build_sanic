@@ -17,13 +17,13 @@ pipeline {
                                 """)
                                 }
 				echo "=====================Installing npm dependences====================="
-				sh "npm install"
+				sh "sudo npm install"
 			}
 		}
 		stage("Push image to Dockerhub") {
 			steps {
 				echo "=====================Building====================="
-				sh "npm run build"
+				sh "sudo npm run build"
 			}
 		}
 	}
