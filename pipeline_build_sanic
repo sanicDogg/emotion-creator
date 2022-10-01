@@ -24,15 +24,13 @@ pipeline {
 			steps {
 				echo "=====================Building====================="
 				sh "npm run build"
-			}
-			steps {
-				echo "=====================Copying====================="
+			
+   			        echo "=====================Copying====================="
 				sh "cp /root/jenkins/workspace/pipeline_build_sanic /home/ubuntu/emotion-creator-jenkins-front"
-			}
-			steps {
+
 				echo "=====================Chown====================="
 				sh "chown ubuntu:ubuntu -R /home/ubuntu/emotion-creator-jenkins-front"
-			}
+			      }
 		}
 	}
 	  post {
