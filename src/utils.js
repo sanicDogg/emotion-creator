@@ -1,5 +1,5 @@
-export const CANVAS_WIDTH = 350;
-export const CANVAS_HEIGHT = 450;
+export const CANVAS_WIDTH = 0.87 * window.innerWidth;
+export const CANVAS_HEIGHT = 0.4 * window.innerHeight;
 export const EMOJI_PADDING = 20;
 
 const EMOJI_SIZE = 33;
