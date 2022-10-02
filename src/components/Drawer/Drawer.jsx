@@ -20,9 +20,6 @@ export const Drawer = ({animated = false, dropDots}) => {
   const {mainEmoji} = useContext(EmojiContext);
   const {changeMode} = useContext(ModeContext);
 
-  console.log(dots)
-
-
   useEffect(() => {
     if (x && y) {
       dots.push(
@@ -38,18 +35,20 @@ export const Drawer = ({animated = false, dropDots}) => {
       .then(res => res.json())
       .then(data => {
         setReadonly(data.length);
-        dots = data || [];
+        dots = data.map(item => new Dot(item.x, item.y, item.emoji)) || [];
       })
       .catch(err => {
         console.log(err)
       })
       .finally(() => {
-        // setIsLoading(false);
+
       })
   }, [])
 
   useEffect(() => {
-    if (readonly) changeMode(VIEW_MODE);
+    if (readonly) {
+      changeMode(VIEW_MODE);
+    }
   }, [readonly, changeMode])
 
   const draw = (context) => {
@@ -57,6 +56,12 @@ export const Drawer = ({animated = false, dropDots}) => {
 
     dots.forEach(dot => {
       if (animated) dot.update();
+      if (readonly) {
+        setTimeout(() => {
+          dot.update();
+          context.fillText(dot.emoji, dot.x, dot.y)
+        }, 1000)
+      }
       context.fillText(dot.emoji, dot.x, dot.y)
     });
   };

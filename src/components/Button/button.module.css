@@ -10,6 +10,7 @@
     font-family: sans-serif;
     margin: var(--margin);
     transform: scale(1);
+    padding: 10px 20px;
 
     transition: transform .05s ease-in-out;
 }

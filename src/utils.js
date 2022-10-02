@@ -5,7 +5,7 @@ export const EMOJI_PADDING = 20;
 export const CREATE_MODE = "CREATE_MODE";
 export const VIEW_MODE = "VIEW_MODE";
 
-const EMOJI_SIZE = 33;
+const EMOJI_SIZE = 23;
 
 export const drawBg = (ctx) => {
   ctx.fillStyle = "rgb(255,255,255)";
@@ -16,7 +16,7 @@ export const drawBg = (ctx) => {
 }
 
 export const emojis = [
-  "👍", "❤", "😊", "💋", "👌"
+  "👍", "🤬", "😁", "🕊", "🤯", "😥", "😱", "🐳", "👎", "❤", "🌚", "🔥", "👏", "🙏", "🐸", "🤡"
 ];
 
 export const DEFAULT_EMOJI = emojis[0];

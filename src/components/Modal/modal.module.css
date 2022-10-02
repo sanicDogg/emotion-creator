@@ -1,11 +1,14 @@
 @import "../../vars.css";
 
 .modalInner {
-    width: 250px;
-    height: 250px;
     z-index: 99999;
-    border-radius: 10px;
     overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    max-width: 280px;
 }
 
 .modal {
@@ -23,4 +26,20 @@
 
 .modal img {
     width: 100%;
+    border-radius: 10px;
+}
+
+.modal h2 {
+    color: white;
+    font-size: calc(var(--button-font-size) - 5px);
+    text-align: center;
+}
+
+.link {
+    display: block;
+    text-decoration: none;
+}
+
+.link:visited {
+    color: black;
 }

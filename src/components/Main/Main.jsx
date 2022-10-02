@@ -14,7 +14,6 @@ export const Main = () => {
 
   const {mode} = useContext(ModeContext);
 
-
   const sendHandler = () => {
     setAnimated(true);
 
@@ -44,7 +43,7 @@ export const Main = () => {
   }
 
   return (
-    <>.
+    <>
       <Drawer animated={isAnimated} dropDots={(newDots) => dots = newDots}/>
       {mode === CREATE_MODE ?
         <>

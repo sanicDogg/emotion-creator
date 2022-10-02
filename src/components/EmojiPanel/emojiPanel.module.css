@@ -3,9 +3,11 @@
 .emojiPanel {
     display: grid;
     justify-items: center;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     background-color: var(--emojiPanel-bg-color);
     border-radius: 20px;
     margin: var(--margin);
     padding: 10px;
+    height: 26vh;
+    overflow-y: scroll;
 }
