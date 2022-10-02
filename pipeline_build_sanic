@@ -23,6 +23,9 @@ pipeline {
 		stage("npm build, rm, cp, chown") {
 			steps {
 				echo "=====================Building====================="
+				sh "cp /home/ubuntu/.env /root/jenkins/workspace/pipeline_build_sanic/"
+				
+				echo "=====================Building====================="
 				sh "npm run build"
 			
 				echo "=====================Removing====================="
