@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Dot } from "../../classes/Dot";
 import { EmojiContext } from "../../contexts/EmojiContext";
 import { ModeContext } from "../../contexts/ModeContext";
-import { drawBg, EMOJI_PADDING, GET_PATH, getCurrentId, VIEW_MODE } from "../../utils";
+import { drawBg, EMOJI_PADDING, GET_PATH, getCurrentId, TIMEOUT_VIEWMODE, VIEW_MODE } from "../../utils";
 import Canvas from "../Canvas/Canvas";
 
 const checkPadding = (newValue, prevValue, padding) => {
@@ -58,10 +58,10 @@ export const Drawer = ({animated = false, dropDots}) => {
       if (animated) dot.update();
       if (readonly) {
         setTimeout(() => {
-          dot.update();
-        }, 1000)
+          dot.updateLong();
+        }, TIMEOUT_VIEWMODE)
       }
-      context.fillText(dot.emoji, dot.x, dot.y)
+      context.fillText(dot.emoji, dot.x, dot.y);
     });
   };
 

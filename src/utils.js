@@ -32,3 +32,5 @@ export const getCurrentId = () => {
   const arr = window.location.href.split("/");
   return arr[arr.length - 1];
 }
+
+export const TIMEOUT_VIEWMODE = 1500;
