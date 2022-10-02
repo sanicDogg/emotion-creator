@@ -38,7 +38,7 @@ pipeline {
 				sh "chown ubuntu:ubuntu -R /home/ubuntu/emotion-creator-jenkins-front"
 				
 				echo "=====================Chown====================="
-				sh "systemct restart nginx"
+				sh "systemctl restart nginx"
 			      }
 		}
 	}
