@@ -1,10 +1,13 @@
 import { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 import { ModeContext } from "../../contexts/ModeContext";
 import { CREATE_MODE, getCurrentId, POST_PATH } from "../../utils";
 import { Button } from "../Button/Button";
+import buttonStyles from "../Button/button.module.css";
 import { Drawer } from "../Drawer/Drawer";
 import { EmojiPanel } from "../EmojiPanel/EmojiPanel";
 import { Modal } from "../Modal/Modal";
+import s from "../Modal/modal.module.css";
 
 let dots = [];
 
@@ -52,7 +55,10 @@ export const Main = () => {
           {isModalActive ? <Modal/> : null}
         </>
         :
-        null
+        <>
+          <p>These emotions were created by this app</p>
+          <Link className={`${buttonStyles.button} ${s.link}`} to={"/"}>Try it yourself</Link>
+        </>
       }
 
     </>

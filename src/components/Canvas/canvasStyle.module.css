@@ -1,4 +1,8 @@
+@import "../../vars.css";
+
 .canvas {
     margin-top: 30px;
     border-radius: 10px;
+    margin-left: var(--margin);
+    margin-right: var(--margin);
 }

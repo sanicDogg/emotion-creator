@@ -5,8 +5,8 @@ import { ModeContext } from "../../contexts/ModeContext";
 import { drawBg, EMOJI_PADDING, GET_PATH, getCurrentId, VIEW_MODE } from "../../utils";
 import Canvas from "../Canvas/Canvas";
 
-const checkPadding = (v1, v2, padding) => {
-  return Math.abs(v1 - v2) > padding ? v1 : v2;
+const checkPadding = (newValue, prevValue, padding) => {
+  return Math.abs(newValue - prevValue) > padding ? newValue : prevValue;
 }
 
 let dots = [];
@@ -14,11 +14,11 @@ let dots = [];
 export const Drawer = ({animated = false, dropDots}) => {
   const [x, setX] = useState();
   const [y, setY] = useState();
-
   const [readonly, setReadonly] = useState(false);
 
   const {mainEmoji} = useContext(EmojiContext);
   const {changeMode} = useContext(ModeContext);
+
 
   useEffect(() => {
     if (x && y) {
@@ -27,8 +27,8 @@ export const Drawer = ({animated = false, dropDots}) => {
       )
       dropDots(dots);
     }
-
-  }, [dropDots, mainEmoji, x, y]);
+// eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dropDots, x, y]);
 
   useEffect(() => {
     fetch(GET_PATH + "?id=" + getCurrentId())
@@ -59,7 +59,6 @@ export const Drawer = ({animated = false, dropDots}) => {
       if (readonly) {
         setTimeout(() => {
           dot.update();
-          context.fillText(dot.emoji, dot.x, dot.y)
         }, 1000)
       }
       context.fillText(dot.emoji, dot.x, dot.y)
@@ -77,9 +76,6 @@ export const Drawer = ({animated = false, dropDots}) => {
 
       setX((x) => checkPadding(touchPosition.x, x, EMOJI_PADDING));
       setY((y) => checkPadding(touchPosition.y, y, EMOJI_PADDING));
-
-    },
-    touchEnd: () => {
 
     },
   }

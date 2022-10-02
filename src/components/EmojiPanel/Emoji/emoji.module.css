@@ -5,6 +5,7 @@
     font-size: var(--emoji-size);
     line-height: var(--emoji-size);
     color: red;
+    -webkit-text-stroke: 2px black;
     transition: transform .1s ease-in-out;
 }
 
