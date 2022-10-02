@@ -9,7 +9,7 @@ pipeline {
 	}
 
 	stages {
-		stage("Create docker image") {
+		stage("Pull git, npm install") {
 			steps {
 				withCredentials([string(credentialsId: 'botSecret2', variable: 'TOKEN'), string(credentialsId: 'chatID2', variable: 'CHAT_ID')]) {
                                 sh  ("""
@@ -20,11 +20,23 @@ pipeline {
 				sh "npm install"
 			}
 		}
-		stage("Push image to Dockerhub") {
+		stage("npm build, rm, cp, chown") {
 			steps {
 				echo "=====================Building====================="
 				sh "npm run build"
-			}
+			
+				echo "=====================Removing====================="
+				sh "rm -fR /home/ubuntu/emotion-creator-jenkins-front"
+				
+   			        echo "=====================Copying====================="
+				sh "cp -R /root/jenkins/workspace/pipeline_build_sanic /home/ubuntu/emotion-creator-jenkins-front"
+				
+				echo "=====================Chown====================="
+				sh "chown ubuntu:ubuntu -R /home/ubuntu/emotion-creator-jenkins-front"
+				
+				echo "=====================Chown====================="
+				sh "systemctl restart nginx"
+			      }
 		}
 	}
 	  post {
