@@ -1,25 +1,35 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { INIT_PATH } from "../../utils";
 import { Button } from "../Button/Button";
 
-const URL = process.env.REACT_APP_API_URL;
-
 export const Homepage = () => {
-  const isLoading = false;
+  const [isLoading, setIsLoading] = useState(false);
+  const [id, setId] = useState(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(URL)
-    fetch(`${URL}/init-session`)
-      .then(res => {
-        console.log(res);
-      })
+    setIsLoading(true);
+
+    fetch(INIT_PATH)
+      .then(res => res.json())
+      .then(json => setId(json._id))
       .catch(err => {
         console.log(err)
       })
+      .finally(() => {
+        setIsLoading(false);
+      })
   }, [])
+
+  const handleClick = () => {
+    if (id) navigate(`/${id}`);
+  }
 
   return (
     <>
-      <Button text={"Create emotion"}/>
+      <Button clickHandler={handleClick} text={"Create emotion"}/>
       {isLoading ? <h1>loading</h1> : null}
     </>
   )

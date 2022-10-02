@@ -3,7 +3,7 @@ import React from "react";
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from "../../utils";
 import s from "./canvasStyle.module.css";
 
-const Canvas = ({draw, touchEventsHandlers}) => {
+const Canvas = ({draw, touchEventsHandlers, readonly}) => {
   const canvas = React.useRef();
 
   React.useEffect(() => {
@@ -25,10 +25,14 @@ const Canvas = ({draw, touchEventsHandlers}) => {
     }
   }, [draw]);
 
-  return <canvas className={s.canvas} ref={canvas} height={CANVAS_HEIGHT} width={CANVAS_WIDTH}
-                 onTouchStart={touchEventsHandlers.touchStart}
-                 onTouchMove={touchEventsHandlers.touchMove}
-  />;
+  return readonly ?
+    <canvas className={s.canvas} ref={canvas} height={CANVAS_HEIGHT} width={CANVAS_WIDTH}/>
+    :
+    <canvas className={s.canvas} ref={canvas} height={CANVAS_HEIGHT} width={CANVAS_WIDTH}
+            onTouchStart={touchEventsHandlers.touchStart}
+            onTouchMove={touchEventsHandlers.touchMove}
+    />;
+
 };
 
 Canvas.propTypes = {
